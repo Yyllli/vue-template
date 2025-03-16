@@ -1,0 +1,53 @@
+{
+    "name": "admin-pro",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "prepare": "husky install",
+        "dev": "vite --mode development",
+        "build": "vite build --mode production",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint:eslint": "eslint --catch --max-warnings 0 {src,mock}/**/*,{vue,ts,tsx} --fix",
+        "lint:prettier": "prettier --write **/*.{js,json,tsx,css,less,scss,vue,html,md}"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^1.6.1",
+        "element-plus": "^2.4.2",
+        "husky": "^9.1.7",
+        "nprogress": "^0.2.0",
+        "pinia": "^2.1.7",
+        "pinia-plugin-persistedstate": "^3.2.0",
+        "vue": "^3.3.8",
+        "vue-router": "^4.2.5"
+    },
+    "devDependencies": {
+        "@eslint/create-config": "github:eslint/create-config",
+        "@eslint/js": "^9.22.0",
+        "@types/node": "^20.9.0",
+        "@types/nprogress": "^0.2.3",
+        "@vitejs/plugin-vue": "^4.4.1",
+        "@vitejs/plugin-vue-jsx": "^3.0.2",
+        "eslint": "^9.22.0",
+        "eslint-config-prettier": "^10.1.1",
+        "eslint-plugin-prettier": "^5.2.3",
+        "eslint-plugin-vue": "^10.0.0",
+        "globals": "^16.0.0",
+        "less": "^4.2.0",
+        "mockjs": "^1.1.0",
+        "prettier": "^3.5.3",
+        "stylelint": "^16.16.0",
+        "stylelint-config-standard": "^37.0.0",
+        "typescript": "^5.2.2",
+        "typescript-eslint": "^8.26.1",
+        "unplugin-auto-import": "^19.1.1",
+        "unplugin-element-plus": "^0.9.1",
+        "unplugin-icons": "^22.1.0",
+        "unplugin-vue-components": "^28.4.1",
+        "vite": "^4.5.0",
+        "vite-plugin-mock": "^3.0.2",
+        "vue-tsc": "^1.8.22"
+    }
+}
