@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 4860653 */
+  src: url('iconfont.woff2?t=1742398779422') format('woff2'),
+       url('iconfont.woff?t=1742398779422') format('woff'),
+       url('iconfont.ttf?t=1742398779422') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tushuguan:before {
+  content: "\e664";
+}
+
+.icon-icon-about:before {
+  content: "\e692";
+}
+
+.icon-my_light:before {
+  content: "\e7d5";
+}
+
+.icon-home:before {
+  content: "\e600";
+}
+
+.icon-tubiao_gongjuxiang:before {
+  content: "\e61f";
+}
+
+.icon-menucaidan2:before {
+  content: "\e854";
+}
+
+.icon-my_light-copy:before {
+  content: "\e855";
+}
+
+.icon-home-copy:before {
+  content: "\e856";
+}
+
+.icon-tubiao_gongjuxiang-copy:before {
+  content: "\e857";
+}
+
+.icon-menucaidan2-copy:before {
+  content: "\e858";
+}
+

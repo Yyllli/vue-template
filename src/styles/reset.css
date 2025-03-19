@@ -72,3 +72,8 @@ td,
 th {
     padding: 0;
 }
+
+a {
+    text-decoration: none;
+    color: #3b82f6;
+}
