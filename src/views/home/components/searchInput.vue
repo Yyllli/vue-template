@@ -72,7 +72,6 @@
 
 <script setup lang="ts">
 	import { ref, onMounted } from 'vue';
-	import { Top } from '@element-plus/icons-vue';
 
 	const activeTab = ref('rewrite');
 	const searchText = ref('');
