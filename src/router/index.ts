@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import { updateMeta } from '@/utils/seo';
 
 // 配置路由
 export const noFoundRoutes: RouteRecordRaw = {
@@ -46,11 +47,27 @@ routes = [...routes, ...UserAggrement];
 
 const router = createRouter({
 	history: createWebHistory(),
-	routes
+	routes,
+	scrollBehavior(to, from, savedPosition) {
+		if (savedPosition) {
+			return savedPosition;
+		} else {
+			return { top: 0 };
+		}
+	}
 });
 
-router.beforeEach(async (to, from, next) => {
-	NProgress.start();
+// 路由守卫处理 SEO
+router.beforeEach((to, from, next) => {
+	// 更新页面元数据
+	if (to.meta) {
+		updateMeta({
+			title: to.meta.title as string,
+			description: to.meta.description as string,
+			keywords: to.meta.keywords as string,
+			url: window.location.origin + to.fullPath
+		});
+	}
 	next();
 });
 
