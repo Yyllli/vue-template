@@ -34,6 +34,7 @@
 		height: 100%;
 		width: 100%;
 		overflow: hidden;
+		background-color: #f9fafb;
 		&:after {
 			visibility: hidden;
 			display: block;

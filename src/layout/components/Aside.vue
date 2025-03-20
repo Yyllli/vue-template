@@ -23,6 +23,7 @@
 				:collapse="isCollapse"
 				text-color="#4A4A4A"
 				active-text-color="#409EFF"
+				background-color="#f9fafb"
 				:unique-opened="true"
 			>
 				<el-menu-item index="1">
