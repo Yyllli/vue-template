@@ -1,6 +1,8 @@
 <template>
 	<div class="header">
-		<div class="title">首页</div>
+		<div class="title">
+			<span>{{ menuStore.currentTitle }}</span>
+		</div>
 		<div class="btns">
 			<div class="btn">
 				<el-icon class="icon"><ShoppingCart /></el-icon>
@@ -58,7 +60,11 @@
 	</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+	import { useMenuStore } from '@/store/modules/menu';
+
+	const menuStore = useMenuStore();
+</script>
 
 <style scoped lang="less">
 	.header {

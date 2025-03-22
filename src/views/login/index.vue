@@ -8,7 +8,10 @@
 		</div>
 
 		<el-card class="login-card">
-			<div class="logo-title">
+			<div
+				class="logo-title"
+				v-if="false"
+			>
 				<img
 					src="@/assets/image/迅智魔方-02.png"
 					alt=""
@@ -195,7 +198,7 @@
 		}
 		ElMessage.success('登录成功');
 		router.push({
-			path: '/'
+			path: '/home'
 		});
 	};
 
@@ -282,7 +285,7 @@
 		:deep(.el-card__body) {
 			padding: 0;
 		}
-		transform: translateY(-15vh);
+		// transform: translateY(-15vh);
 	}
 
 	:deep(.el-card) {
@@ -380,22 +383,25 @@
 
 	.logo {
 		position: fixed;
-		top: 0;
-		left: 0;
-		width: 200px;
-		height: 200px;
+		top: 6px;
+		left: -30px;
+		// width: 200px;
+		// height: 200px;
 		img {
-			width: 100%;
-			height: 100%;
-			transform: translate(-50px, -50px);
+			width: 60%;
+			height: 60%;
+			// transform: translate(-50px, -50px);
 		}
 	}
 
 	.logo-title {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 20px;
 		img {
-			transform: translateY(12vh);
-			width: 100%;
-			height: 100%;
+			// transform: translateY(12vh);
+			width: 40%;
+			height: 40%;
 		}
 	}
 </style>

@@ -6,10 +6,10 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Icons from 'unplugin-icons/vite';
 import Components from 'unplugin-vue-components/vite';
 import IconsResolver from 'unplugin-icons/resolver';
-import ElementPlus from 'unplugin-element-plus/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import path from 'path';
 
 export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 	// 获取当前工作目录
@@ -22,7 +22,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 		root,
 		// 项目部署的基础路径
 		base: './',
-		publicDir: fileURLToPath(new URL('./public', import.meta.url)), // 无需处理的静态资源位置
+		publicDir: 'public',
 		assetsInclude: fileURLToPath(new URL('./src/assets', import.meta.url)), // 需要处理的静态资源位置
 		plugins: [
 			// Vue模板文件编译插件
@@ -34,10 +34,6 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 				// 如果接口为 /mock/xxx 以 mock 开头就会被拦截响应配置的内容
 				mockPath: 'mock', // 数据模拟需要拦截的请求起始 URL
 				enable: true // 本地环境是否开启 mock 功能
-			}),
-			// 开启ElementPlus自动引入CSS
-			ElementPlus({
-				useSource: true
 			}),
 			// 自动导入组件
 			AutoImport({
@@ -106,6 +102,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 			sourcemap: false,
 			// 打包大小超出 400kb 提示警告
 			chunkSizeWarningLimit: 400,
+			assetsDir: 'assets',
 			rollupOptions: {
 				// 打包入口文件 根目录下的 index.html
 				// 也就是项目从哪个文件开始打包
@@ -119,14 +116,34 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 					format: 'esm',
 					chunkFileNames: 'static/js/[name]-[hash].js',
 					entryFileNames: 'static/js/[name]-[hash].js',
-					assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+					assetFileNames: (assetInfo) => {
+						if (!assetInfo.name)
+							return 'static/[ext]/[name]-[hash][extname]';
+
+						const info = assetInfo.name.split('.');
+						let extType = info[info.length - 1];
+						if (
+							/\.(png|jpe?g|gif|svg|webp|ico)(\?.*)?$/.test(
+								assetInfo.name
+							)
+						) {
+							extType = 'imgs';
+						} else if (
+							/\.(woff2?|eot|ttf|otf)(\?.*)?$/.test(
+								assetInfo.name
+							)
+						) {
+							extType = 'fonts';
+						}
+						return `static/${extType}/[name]-[hash][extname]`;
+					}
 				}
 			}
 		},
 		// 配置别名
 		resolve: {
 			alias: {
-				'@': fileURLToPath(new URL('./src', import.meta.url)),
+				'@': path.resolve(__dirname, './src'),
 				'#': fileURLToPath(new URL('./types', import.meta.url))
 			}
 		},
@@ -137,6 +154,13 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 				'element-plus',
 				'@element-plus/icons-vue'
 			]
+		},
+		css: {
+			preprocessorOptions: {
+				scss: {
+					additionalData: `@use "@/styles/element/index.scss" as *;`
+				}
+			}
 		}
 	};
 });

@@ -6,7 +6,7 @@
 	"scripts": {
 		"prepare": "husky install",
 		"dev": "vite --mode development",
-		"build": "npm run generate-sitemap && vite build --mode production",
+		"build": "vite build --mode production && node -r ts-node/register src/utils/sitemap.ts",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"lint:eslint": "eslint --catch --max-warnings 0 {src,mock}/**/*,{vue,ts,tsx} --fix",
 		"lint:prettier": "prettier --write **/*.{js,json,tsx,css,less,scss,vue,html,md}",

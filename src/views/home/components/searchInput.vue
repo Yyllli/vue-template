@@ -39,6 +39,13 @@
 							<i class="iconfont icon-tushuguan"></i>
 							<span>知识库</span>
 						</el-button>
+						<el-button
+							class="btn active-knowledge-base"
+							text
+						>
+							<!-- <i class="iconfont icon-tushuguan"></i> -->
+							<span>需要原视频截图</span>
+						</el-button>
 
 						<el-popconfirm
 							title="是否需要在文案生成之后生成分镜头图片?"
@@ -220,6 +227,24 @@
 		}
 		span {
 			color: #6c757d;
+		}
+	}
+
+	.active-knowledge-base {
+		margin-top: 12px;
+		padding: 6px 20px;
+		border: 1px solid rgba(0, 122, 255, 0.15);
+		border-radius: 20px;
+		font-size: 14px;
+		color: #5a9cf8;
+		cursor: pointer;
+		.iconfont {
+			margin-right: 4px;
+			font-size: 16px;
+			color: #4a4a4a;
+		}
+		span {
+			color: #5a9cf8;
 		}
 	}
 

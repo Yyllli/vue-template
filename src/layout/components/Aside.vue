@@ -19,35 +19,37 @@
 				/>
 			</div>
 			<el-menu
-				default-active="1"
+				:default-active="activeMenu"
 				:collapse="isCollapse"
 				text-color="#4A4A4A"
 				active-text-color="#409EFF"
 				background-color="#f9fafb"
 				:unique-opened="true"
+				router
+				@select="handleSelect"
 			>
-				<el-menu-item index="1">
+				<el-menu-item index="/home">
 					<i class="iconfont icon-home"></i>
 					<template #title>
 						<span class="menu-title">首页</span>
 					</template>
 				</el-menu-item>
-				<el-menu-item index="2">
+				<el-menu-item index="/knowledgeBase">
 					<i class="iconfont icon-menucaidan2"></i>
 					<template #title>
 						<span class="menu-title">知识库</span>
 					</template>
 				</el-menu-item>
-				<el-sub-menu index="3">
+				<el-sub-menu index="tools">
 					<template #title>
 						<i class="iconfont icon-tubiao_gongjuxiang"></i>
 						<span class="menu-title">工具箱</span>
 					</template>
 					<el-menu-item-group>
-						<el-menu-item index="1-1">
+						<el-menu-item index="/tools/video">
 							<span class="menu-title">视频</span>
 						</el-menu-item>
-						<el-menu-item index="1-2">
+						<el-menu-item index="/tools/image">
 							<span class="menu-title">图片</span>
 						</el-menu-item>
 					</el-menu-item-group>
@@ -55,7 +57,7 @@
 			</el-menu>
 			<div
 				class="collapse-icon"
-				@click="toggleClick"
+				@click="isCollapse = !isCollapse"
 			>
 				<el-icon
 					v-if="!isCollapse"
@@ -73,57 +75,37 @@
 </template>
 
 <script setup lang="ts">
-	import { ref, reactive, onBeforeMount } from 'vue';
+	import { ref, computed, onMounted } from 'vue';
+	import { useRoute } from 'vue-router';
+	import { Expand, Fold } from '@element-plus/icons-vue';
+	import { useMenuStore } from '@/store/modules/menu';
+
+	const route = useRoute();
+	const menuStore = useMenuStore();
+	const isCollapse = ref(false);
 	const windowHeight = ref(0);
-	onBeforeMount(() => {
-		windowHeight.value =
-			document.documentElement.clientHeight || document.body.clientHeight;
-	});
-	interface Tree {
-		id: string;
-		label: string;
-		icon?: string;
-		activeIcon?: string;
-		children?: Tree[];
-	}
 
-	const menu = reactive<Tree[]>([
-		{
-			id: 'home',
-			label: '首页',
-			icon: 'icon-home',
-			activeIcon: 'icon-my_light-copy'
-		},
-		{
-			id: 'repository',
-			label: '知识库',
-			icon: 'icon-menucaidan2',
-			activeIcon: 'icon-menu-copy'
-		},
-		{
-			id: 'toolbox',
-			label: '工具箱',
-			icon: 'icon-tubiao_gongjuxiang',
-			activeIcon: 'icon-tubiao_gongjuxiang',
-			children: [
-				{
-					id: '视频',
-					label: '视频'
-				}
-			]
-		}
-	]);
-
-	const id = ref('home');
-
-	const handleNodeClick = (data: Tree) => {
-		// console.log(data);
-		id.value = data.id;
+	// 菜单路径与标题的映射
+	const menuTitles: Record<string, string> = {
+		'/home': '首页',
+		'/knowledgeBase': '知识库',
+		'/tools/video': '视频',
+		'/tools/image': '图片'
 	};
 
-	const isCollapse = ref(false);
-	const toggleClick = () => {
-		isCollapse.value = !isCollapse.value;
+	onMounted(() => {
+		windowHeight.value =
+			document.documentElement.clientHeight || document.body.clientHeight;
+		// 初始化当前页面标题
+		const currentPath = route.path;
+		menuStore.setCurrentTitle(menuTitles[currentPath] || '首页');
+	});
+
+	const activeMenu = computed(() => route.path);
+
+	// 处理菜单选择
+	const handleSelect = (index: string) => {
+		menuStore.setCurrentTitle(menuTitles[index] || '首页');
 	};
 </script>
 
@@ -228,9 +210,7 @@
 	}
 
 	.aside {
-		// min-width: 150px;
 		max-width: 260px;
-		// width: 18vw;
 	}
 
 	.menu-title {

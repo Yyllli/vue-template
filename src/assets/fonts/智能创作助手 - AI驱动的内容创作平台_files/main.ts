@@ -1,0 +1,18 @@
+import { createApp } from "/node_modules/.vite/deps/vue.js?v=8878d936";
+import App from "/src/App.vue";
+import router from "/src/router/index.ts?t=1742486887161";
+import pinia from "/src/store/index.ts";
+import "/src/styles/reset.css";
+import * as ElementPlusIconsVue from "/node_modules/.vite/deps/@element-plus_icons-vue.js?v=8878d936";
+import "/src/assets/fonts/iconfont.css";
+import { vXss } from "/src/directives/xss.ts";
+const app = createApp(App);
+app.use(router);
+app.use(pinia);
+app.directive("xss", vXss);
+app.mount("#app");
+for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+  app.component(key, component);
+}
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1haW4udHMiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgY3JlYXRlQXBwIH0gZnJvbSAndnVlJztcbmltcG9ydCBBcHAgZnJvbSAnLi9BcHAudnVlJztcbmltcG9ydCByb3V0ZXIgZnJvbSAnLi9yb3V0ZXInO1xuaW1wb3J0IHBpbmlhIGZyb20gJy4vc3RvcmUnO1xuaW1wb3J0ICcuL3N0eWxlcy9yZXNldC5jc3MnO1xuaW1wb3J0ICogYXMgRWxlbWVudFBsdXNJY29uc1Z1ZSBmcm9tICdAZWxlbWVudC1wbHVzL2ljb25zLXZ1ZSc7XG5pbXBvcnQgJ0AvYXNzZXRzL2ZvbnRzL2ljb25mb250LmNzcyc7XG5pbXBvcnQgeyB2WHNzIH0gZnJvbSAnLi9kaXJlY3RpdmVzL3hzcyc7XG5cbmNvbnN0IGFwcCA9IGNyZWF0ZUFwcChBcHApO1xuYXBwLnVzZShyb3V0ZXIpO1xuYXBwLnVzZShwaW5pYSk7XG5cbi8vIOazqOWGjOWFqOWxgCBYU1Mg6Ziy5oqk5oyH5LukXG5hcHAuZGlyZWN0aXZlKCd4c3MnLCB2WHNzKTtcblxuYXBwLm1vdW50KCcjYXBwJyk7XG5cbmZvciAoY29uc3QgW2tleSwgY29tcG9uZW50XSBvZiBPYmplY3QuZW50cmllcyhFbGVtZW50UGx1c0ljb25zVnVlKSkge1xuXHRhcHAuY29tcG9uZW50KGtleSwgY29tcG9uZW50KTtcbn1cbiJdLCJtYXBwaW5ncyI6IkFBQUEsU0FBUyxpQkFBaUI7QUFDMUIsT0FBTyxTQUFTO0FBQ2hCLE9BQU8sWUFBWTtBQUNuQixPQUFPLFdBQVc7QUFDbEIsT0FBTztBQUNQLFlBQVkseUJBQXlCO0FBQ3JDLE9BQU87QUFDUCxTQUFTLFlBQVk7QUFFckIsTUFBTSxNQUFNLFVBQVUsR0FBRztBQUN6QixJQUFJLElBQUksTUFBTTtBQUNkLElBQUksSUFBSSxLQUFLO0FBR2IsSUFBSSxVQUFVLE9BQU8sSUFBSTtBQUV6QixJQUFJLE1BQU0sTUFBTTtBQUVoQixXQUFXLENBQUMsS0FBSyxTQUFTLEtBQUssT0FBTyxRQUFRLG1CQUFtQixHQUFHO0FBQ25FLE1BQUksVUFBVSxLQUFLLFNBQVM7QUFDN0I7IiwibmFtZXMiOltdfQ==
